@@ -772,7 +772,11 @@ function showScreen(id) {
 }
 window.addEventListener('DOMContentLoaded', function() {
   const savedName = localStorage.getItem('profileName') || 'Esben Ernebjerg';
+const savedDob = localStorage.getItem('profileDob');
 
+if (savedDob) {
+  document.getElementById('editDob').value = savedDob;
+}
   document.getElementById('editName').value = savedName;
   document.getElementById('cardName').textContent = savedName;
   document.getElementById('qrCardName').textContent = savedName;
