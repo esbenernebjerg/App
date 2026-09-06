@@ -782,10 +782,13 @@ if (savedDob) {
   document.getElementById('qrCardName').textContent = savedName;
 });
 function saveProfile() {
-  const name = document.getElementById('editName').value.trim() || 'Esben Ernebjerg';
-  const dob  = document.getElementById('editDob').value;
-localStorage.setItem('profileDob', dob);
-  document.getElementById('profileDobDisplay').textContent = dob;
+  const name = document.getElementById('editName').value.trim() || 'Julie Jensen';
+  const dob = document.getElementById('editDob').value;
+
+  localStorage.setItem('profileDob', dob);
+
+  // resten af din kode...
+}
   
   localStorage.setItem('profileName', name);
   document.getElementById('cardName').textContent = name;
