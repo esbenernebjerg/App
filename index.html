@@ -780,7 +780,8 @@ window.addEventListener('DOMContentLoaded', function() {
 function saveProfile() {
   const name = document.getElementById('editName').value.trim() || 'Esben Ernebjerg';
   const dob  = document.getElementById('editDob').value;
-
+localStorage.setItem('profileDob', dob);
+  
   localStorage.setItem('profileName', name);
   document.getElementById('cardName').textContent = name;
   document.getElementById('qrCardName').textContent = name;
