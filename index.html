@@ -770,25 +770,35 @@ function showScreen(id) {
   if (id === 's-qr') { drawQr(); qrTimer = setInterval(drawQr, 300); }
   else { clearInterval(qrTimer); qrTimer = null; }
 }
+function formatDob(dob) {
+  const d = new Date(dob + 'T00:00:00');
+  if (isNaN(d.getTime())) return '';
+  const mo = ['Jan','Feb','Mar','Apr','Maj','Jun','Jul','Aug','Sep','Okt','Nov','Dec'];
+  return d.getDate()+' '+mo[d.getMonth()]+', '+d.getFullYear();
+}
+
 window.addEventListener('DOMContentLoaded', function() {
   const savedName = localStorage.getItem('profileName') || 'Esben Ernebjerg';
+  const savedDob  = localStorage.getItem('profileDob')  || '2006-04-05';
 
   document.getElementById('editName').value = savedName;
   document.getElementById('cardName').textContent = savedName;
   document.getElementById('qrCardName').textContent = savedName;
+
+  document.getElementById('editDob').value = savedDob;
+  const formatted = formatDob(savedDob);
+  if (formatted) document.getElementById('cardDob').textContent = formatted;
 });
 function saveProfile() {
   const name = document.getElementById('editName').value.trim() || 'Esben Ernebjerg';
-  const dob  = document.getElementById('editDob').value;
+  const dob  = document.getElementById('editDob').value || '2006-04-05';
 
   localStorage.setItem('profileName', name);
+  localStorage.setItem('profileDob', dob);
   document.getElementById('cardName').textContent = name;
   document.getElementById('qrCardName').textContent = name;
-  if (dob) {
-    const d = new Date(dob + 'T00:00:00');
-    const mo = ['Jan','Feb','Mar','Apr','Maj','Jun','Jul','Aug','Sep','Okt','Nov','Dec'];
-    document.getElementById('cardDob').textContent = d.getDate()+' '+mo[d.getMonth()]+', '+d.getFullYear();
-  }
+  const formatted = formatDob(dob);
+  if (formatted) document.getElementById('cardDob').textContent = formatted;
   showScreen('s-indstillinger');
 }
 function addCard() { alert('Tilføj nyt kort — funktion kommer snart!'); }
